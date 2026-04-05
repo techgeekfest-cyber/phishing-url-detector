@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load dataset
-data = pd.read_csv("dataset/phishing.csv")
+data = pd.read_csv("data/phishing.csv")
 
 # Separate features and labels
 X = data.drop("class", axis=1)
@@ -50,6 +50,26 @@ print("\nModel Accuracy:", accuracy)
 
 print("\nClassification Report:\n")
 print(classification_report(y_test, y_pred))
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+plt.figure(figsize=(5,4))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
+            xticklabels=["Legitimate", "Phishing"],
+            yticklabels=["Legitimate", "Phishing"])
+
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.title("Confusion Matrix")
+
+plt.savefig("confusion_matrix.png")
+plt.close()
+
+print("Confusion matrix saved as confusion_matrix.png")
 
 import pandas as pd
 

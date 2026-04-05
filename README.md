@@ -1,8 +1,6 @@
 # Phishing URL Detector (AI + Cybersecurity Project)
 
-This project detects whether a URL is phishing or legitimate using a Machine Learning model trained on security-related website features.
-
-It combines Artificial Intelligence and Cybersecurity concepts to classify suspicious URLs based on structural indicators.
+Machine Learning-based phishing URL detector built using Logistic Regression and handcrafted cybersecurity features. The model achieves ~93% accuracy on a dataset of 11,000+ URLs and supports real-time command-line predictions.
 
 ---
 
@@ -63,8 +61,8 @@ python3 src/detector.py https://example.com
 
 ## Example Output
 
+python3 src/detector.py https://example.com
 Checking URL: https://example.com
-
 Legitimate website
 
 
@@ -79,6 +77,12 @@ Algorithm used:
 Accuracy achieved:
 
 - ~93%
+
+## Confusion Matrix
+
+This matrix shows how well the model distinguishes phishing vs legitimate URLs.
+
+![Confusion Matrix](confusion_matrix.png)
 
 ---
 
