@@ -86,23 +86,36 @@ import re
 
 
 def extract_basic_features(url):
+    from urllib.parse import urlparse
+    import re
+
     features = {}
 
-    # Using IP address
-    features["UsingIP"] = 1 if re.match(r"^\d+\.\d+\.\d+\.\d+", url) else -1
+    parsed = urlparse(url)
+    domain = parsed.netloc
 
-    # URL length
+    # Using IP address instead of domain
+    features["UsingIP"] = 1 if re.match(r"^\d+\.\d+\.\d+\.\d+", domain) else -1
+
+    # Long URL detection
     features["LongURL"] = 1 if len(url) > 75 else -1
 
-    # Contains @ symbol
+    # Presence of @ symbol
     features["Symbol@"] = 1 if "@" in url else -1
 
-    # Prefix-Suffix (- in domain)
-    domain = urlparse(url).netloc
+    # Dash in domain
     features["PrefixSuffix-"] = 1 if "-" in domain else -1
 
     # HTTPS usage
-    features["HTTPS"] = 1 if url.startswith("https") else -1
+    features["HTTPS"] = 1 if parsed.scheme == "https" else -1
+
+    # Suspicious keywords
+    suspicious_keywords = ["login", "secure", "account", "verify", "update"]
+    features["RequestURL"] = 1 if any(word in url.lower() for word in suspicious_keywords) else -1
+
+    # URL shorteners
+    shorteners = ["bit.ly", "tinyurl.com", "goo.gl"]
+    features["ShortURL"] = 1 if any(service in url.lower() for service in shorteners) else -1
 
     return features
 # Command-line URL prediction (prototype)
