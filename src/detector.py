@@ -84,6 +84,8 @@ rf_accuracy = accuracy_score(y_test, rf_pred)
 
 print("\nRandom Forest Accuracy:", rf_accuracy)
 
+
+
 print("\nClassification Report:\n")
 print(classification_report(y_test, y_pred))
 from sklearn.metrics import confusion_matrix

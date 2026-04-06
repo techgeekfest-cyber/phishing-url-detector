@@ -111,6 +111,9 @@ The following models were evaluated:
 | Random Forest | ~96% |
 
 Although Random Forest achieved higher accuracy, Logistic Regression was selected for deployment due to its interpretability and coefficient-based feature importance analysis.
+Logistic Regression → interpretability
+Random Forest → performance boost
+XGBoost was explored but omitted due to environment compatibility constraints.
 
 ## Confusion Matrix
 
