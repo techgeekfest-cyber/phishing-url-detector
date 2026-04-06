@@ -4,7 +4,15 @@ import pandas as pd
 data = pd.read_csv("data/phishing.csv")
 
 # Separate features and labels
-X = data.drop("class", axis=1)
+selected_features = [
+    "UsingIP",
+    "LongURL",
+    "Symbol@",
+    "PrefixSuffix-",
+    "HTTPS"
+]
+
+X = data[selected_features]
 y = data["class"]
 
 # Show dataset info
@@ -30,14 +38,11 @@ print("Testing samples:", X_test.shape[0])
 import os
 import joblib
 
-if os.path.exists("phishing_model.pkl"):
-    model = joblib.load("phishing_model.pkl")
-    print("Loaded saved model!")
-else:
-    model = LogisticRegression(max_iter=1000)
-    model.fit(X_train, y_train)
-    joblib.dump(model, "phishing_model.pkl")
-    print("Model trained and saved!")
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+joblib.dump(model, "phishing_model.pkl")
+
+print("Model retrained and saved!")
 
 
 
@@ -147,35 +152,8 @@ def extract_basic_features(url):
     # HTTPS usage
     features["HTTPS"] = 1 if parsed.scheme == "https" else -1
 
-    # Suspicious keywords
-    suspicious_keywords = ["login", "secure", "account", "verify", "update"]
-    features["RequestURL"] = 1 if any(word in url.lower() for word in suspicious_keywords) else -1
-
-    # URL shorteners
-    shorteners = ["bit.ly", "tinyurl.com", "goo.gl"]
-    features["ShortURL"] = 1 if any(service in url.lower() for service in shorteners) else -1
+    
 
     return features
-# Command-line URL prediction (prototype)
-if len(sys.argv) > 1:
-    print("\nChecking URL:", sys.argv[1])
-
-    url = sys.argv[1]
-
-features = extract_basic_features(url)
-
-sample_df = pd.DataFrame([features])
-
-# Fill missing columns with default value (-1)
-for col in X.columns:
-    if col not in sample_df:
-        sample_df[col] = -1
-
-sample_df = sample_df[X.columns]
-
-prediction = model.predict(sample_df)
-
-if prediction[0] == -1:
-    print("⚠️ Phishing website detected")
-else:
-    print("✅ Legitimate website")
+print("\nTop 10 phishing indicators:\n")
+print(feature_importance.head(10))
