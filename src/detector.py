@@ -46,6 +46,28 @@ y_pred = model.predict(X_test)
 
 # Evaluate model
 accuracy = accuracy_score(y_test, y_pred)
+from sklearn.metrics import roc_curve, roc_auc_score
+import matplotlib.pyplot as plt
+
+# ROC Curve
+y_prob = model.predict_proba(X_test)[:, 1]
+
+fpr, tpr, thresholds = roc_curve(y_test, y_prob, pos_label=1)
+auc_score = roc_auc_score(y_test, y_prob)
+
+plt.figure(figsize=(6,5))
+plt.plot(fpr, tpr, label=f"AUC = {auc_score:.3f}")
+plt.plot([0,1], [0,1], linestyle="--")
+
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve")
+plt.legend()
+
+plt.savefig("roc_curve.png")
+plt.close()
+
+print("ROC curve saved as roc_curve.png")
 print("\nModel Accuracy:", accuracy)
 
 print("\nClassification Report:\n")

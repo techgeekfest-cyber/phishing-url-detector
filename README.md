@@ -86,6 +86,12 @@ This matrix shows how well the model distinguishes phishing vs legitimate URLs.
 
 ---
 
+## ROC Curve
+
+This curve evaluates classifier robustness across different decision thresholds.
+
+![ROC Curve](roc_curve.png)
+
 ## Future Improvements
 
 - Add more phishing feature extraction rules
