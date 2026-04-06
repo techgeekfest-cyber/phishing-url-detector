@@ -129,6 +129,10 @@ This curve evaluates classifier robustness across different decision thresholds.
 
 ![ROC Curve](roc_curve.png)
 
+## Streamlit Demo
+
+![Demo](streamlit_demo.png)
+
 ## Future Improvements
 
 - Add more phishing feature extraction rules
