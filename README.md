@@ -29,6 +29,29 @@ The dataset contains 11,000+ URLs with 30 phishing indicators such as:
 
 ---
 
+## Dataset Details
+
+The model was trained on a phishing website dataset containing 11,000+ labeled URLs.
+
+Each sample includes 30 handcrafted security-related features such as:
+
+- HTTPS usage
+- IP address presence
+- URL length
+- prefix-suffix usage
+- domain age indicators
+- traffic ranking signals
+- Google indexing status
+- anchor URL behavior
+
+Target labels:
+
+- 1 → Legitimate website
+- -1 → Phishing website
+
+Dataset source:
+UCI Machine Learning Repository phishing dataset.
+
 ## Project Structure
 phishing-url-detector/
 │
