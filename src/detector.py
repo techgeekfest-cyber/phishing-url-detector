@@ -70,6 +70,20 @@ plt.close()
 print("ROC curve saved as roc_curve.png")
 print("\nModel Accuracy:", accuracy)
 
+from sklearn.ensemble import RandomForestClassifier
+
+# Train Random Forest model
+rf_model = RandomForestClassifier(random_state=42)
+rf_model.fit(X_train, y_train)
+
+# Predict with Random Forest
+rf_pred = rf_model.predict(X_test)
+
+# Evaluate Random Forest
+rf_accuracy = accuracy_score(y_test, rf_pred)
+
+print("\nRandom Forest Accuracy:", rf_accuracy)
+
 print("\nClassification Report:\n")
 print(classification_report(y_test, y_pred))
 from sklearn.metrics import confusion_matrix

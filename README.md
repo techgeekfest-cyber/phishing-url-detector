@@ -101,6 +101,17 @@ Accuracy achieved:
 
 - ~93%
 
+## Model Comparison
+
+The following models were evaluated:
+
+| Model | Accuracy |
+|------|----------|
+| Logistic Regression | ~93% |
+| Random Forest | ~96% |
+
+Logistic Regression was selected for deployment due to its interpretability and efficiency on structured feature data.
+
 ## Confusion Matrix
 
 This matrix shows how well the model distinguishes phishing vs legitimate URLs.
